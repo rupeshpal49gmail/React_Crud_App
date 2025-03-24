@@ -4,8 +4,12 @@ import { StudentDetails } from "./StudentDetails";
 
 function App() {
   const [data, setData] = useState([]);
+  const [stdName, setStdName] = useState("");
+  const [stdAge, setStdAge] = useState(0);
+  const [stdId, setStdId] = useState(0);
+  const [stdRollNumber, setStdRollNumber] = useState(0);
 
-  // Bind Studentdetails file to render start //
+  // Bind Studentdetails file to render, start //
 
   useEffect(() => {
     setData(StudentDetails);
@@ -15,7 +19,13 @@ function App() {
 
   // Handle edit section start //
   const handleEdit = (id) => {
-    alert(id);
+    const dt = data.filter((item) => item.id === id);
+    if (dt !== undefined) {
+      setStdId(stdId);
+      setStdName(dt[0].stdName);
+      setStdAge(dt[0].stdAge);
+      setStdRollNumber(dt[0].stdRollNumber);
+    }
   };
   // Handle edit section end //
 
@@ -31,9 +41,28 @@ function App() {
 
   // Handle delete section end //
 
+  // Handle save start //
+  const handleSave = () => {};
+
+  // Handle save end //
+
+  // Handle clear start //
+  const handleClear = () => {};
+
+  // Handle save end //
+
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          background: "black",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+          height: "35vh",
+          color: "white",
+        }}
+      >
         <div>
           <label>Student Name</label>
           <input type="text" placeholder="Student name" />
@@ -47,15 +76,21 @@ function App() {
           <input type="number" placeholder="Roll number" />
         </div>
         <div>
-          <button className="btn btn-primary" onClick={() => handleSave(id)}>
+          <button
+            className="btn btn-primary mx-2"
+            onClick={() => handleSave(id)}
+          >
             Save
           </button>
-          <button className="btn btn-primary" onClick={() => handleClear(id)}>
+          <button
+            className="btn btn-primary mx-5"
+            onClick={() => handleClear(id)}
+          >
             Clear
           </button>
         </div>
       </div>
-      <table className="table table-hover">
+      <table className="table table-hover table-dark">
         <thead>
           <tr>
             <td>Sr. No</td>
