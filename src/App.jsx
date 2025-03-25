@@ -6,7 +6,7 @@ function App() {
   const [data, setData] = useState([]);
   const [stdName, setStdName] = useState("");
   const [stdAge, setStdAge] = useState(0);
-  const [stdId, setStdId] = useState(0);
+  const [id, setId] = useState(0);
   const [stdRollNumber, setStdRollNumber] = useState(0);
 
   // Bind Studentdetails file to render, start //
@@ -20,11 +20,11 @@ function App() {
   // Handle edit section start //
   const handleEdit = (id) => {
     const dt = data.filter((item) => item.id === id);
-    if (dt !== undefined) {
-      setStdId(stdId);
-      setStdName(dt[0].stdName);
-      setStdAge(dt[0].stdAge);
-      setStdRollNumber(dt[0].stdRollNumber);
+    if (dt.length > 0) {
+      setId(id);
+      setStdName(dt[0].studentName);
+      setStdAge(dt[0].studentAge);
+      setStdRollNumber(dt[0].rollNumber);
     }
   };
   // Handle edit section end //
@@ -65,15 +65,30 @@ function App() {
       >
         <div>
           <label>Student Name</label>
-          <input type="text" placeholder="Student name" />
+          <input
+            type="text"
+            placeholder="Student name"
+            onChange={(e) => setStdName(e.target.value)}
+            value={stdName}
+          />
         </div>
         <div>
           <label>Age</label>
-          <input type="number" placeholder="Age" />
+          <input
+            type="number"
+            placeholder="Age"
+            onChange={(e) => setStdAge(e.target.value)}
+            value={stdAge}
+          />
         </div>
         <div>
           <label>Roll number</label>
-          <input type="number" placeholder="Roll number" />
+          <input
+            type="number"
+            placeholder="Roll number"
+            onChange={(e) => setStdRollNumber(e.target.value)}
+            value={stdRollNumber}
+          />
         </div>
         <div>
           <button
