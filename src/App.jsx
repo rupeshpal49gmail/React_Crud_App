@@ -8,6 +8,7 @@ function App() {
   const [stdAge, setStdAge] = useState(0);
   const [id, setId] = useState(0);
   const [stdRollNumber, setStdRollNumber] = useState(0);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   // Bind Studentdetails file to render, start //
 
@@ -21,6 +22,7 @@ function App() {
   const handleEdit = (id) => {
     const dt = data.filter((item) => item.id === id);
     if (dt.length > 0) {
+      setIsUpdate(true);
       setId(id);
       setStdName(dt[0].studentName);
       setStdAge(dt[0].studentAge);
@@ -47,9 +49,18 @@ function App() {
   // Handle save end //
 
   // Handle clear start //
-  const handleClear = () => {};
+  const handleClear = () => {
+    setId(0);
+    setStdName("");
+    setStdAge("");
+    setStdRollNumber("");
+    setIsUpdate(false);
+  };
+  // Handle clear end //
 
-  // Handle save end //
+  // Handle update start//
+  const handleUpdate = () => {};
+  // Handle update end//
 
   return (
     <>
@@ -91,12 +102,21 @@ function App() {
           />
         </div>
         <div>
-          <button
-            className="btn btn-primary mx-2"
-            onClick={() => handleSave(id)}
-          >
-            Save
-          </button>
+          {!isUpdate ? (
+            <button
+              className="btn btn-primary mx-2"
+              onClick={() => handleSave(id)}
+            >
+              Save
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary mx-2"
+              onClick={() => handleUpdate(id)}
+            >
+              Update
+            </button>
+          )}
           <button
             className="btn btn-primary mx-5"
             onClick={() => handleClear(id)}
