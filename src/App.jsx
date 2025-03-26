@@ -44,7 +44,22 @@ function App() {
   // Handle delete section end //
 
   // Handle save start //
-  const handleSave = () => {};
+  const handleSave = (e) => {
+    let error = "";
+    if (stdName === "") error += "Student name is required";
+    if (stdAge <= 0) error += "Student age is required";
+    if (stdRollNumber === "") error += "Roll number is required";
+    e.preventDefault();
+    const dt = [...data];
+    const newObject = {
+      id: StudentDetails.length + 1,
+      studentName: stdName,
+      studentAge: stdAge,
+      rollNumber: stdRollNumber,
+    };
+    dt.push(newObject);
+    setData(dt);
+  };
 
   // Handle save end //
 
@@ -59,7 +74,20 @@ function App() {
   // Handle clear end //
 
   // Handle update start//
-  const handleUpdate = () => {};
+  const handleUpdate = () => {
+    const index = data
+      .map((item) => {
+        return item.id;
+      })
+      .indexOf(id);
+    const dt = [...data];
+    dt[index].studentName = stdName;
+    dt[index].rollNumber = stdRollNumber;
+    dt[index].studentAge = stdAge;
+
+    setData(dt);
+    handleClear();
+  };
   // Handle update end//
 
   return (
@@ -105,7 +133,7 @@ function App() {
           {!isUpdate ? (
             <button
               className="btn btn-primary mx-2"
-              onClick={() => handleSave(id)}
+              onClick={(e) => handleSave(e)}
             >
               Save
             </button>
